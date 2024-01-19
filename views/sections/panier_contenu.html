@@ -1,0 +1,177 @@
+
+<!-- START SECTION SHOP -->
+<div class="section">
+	<div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive shop_cart_table">
+                    <% if (panier != null) { %>
+                	<table class="table">
+                    	<thead>
+                        	<tr>
+                            	<th class="product-thumbnail">&nbsp;</th>
+                                <th class="product-name">Produits</th>
+                                <th class="product-price">Prix unitaire</th>
+                                <th class="product-quantity">Quantité</th>
+                                <th class="product-subtotal">Prix total</th>
+                                <th class="product-remove">Suppression</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                           
+                             
+<% panier.Lignepaniers.forEach(ligne => { %>
+    <tr>
+                            	<td class="product-thumbnail"><a href="#"><img src="<%= ligne.Produit.Media[0].fichier%>" alt="product1"></a></td>
+                                <td class="product-name" data-title="Product"><a href="#"><%= ligne.Produit.nom %></a></td>
+                                <td class="product-price" data-title="Price"><%= ligne.prixunitaire.toLocaleString('fr-FR') %></td>
+                                <td class="product-quantity" data-title="Quantity"><div class="quantity">
+                                <input type="button" value="-" class="minus">
+                                <input type="text" name="quantity" value="<%= ligne.quantite %>" title="Qty" class="qty" size="4">
+                                <input type="button" value="+" class="plus">
+                              </div></td>
+                              	<td class="product-subtotal" data-title="Total"><%= ligne.prixtotal.toLocaleString("fr-FR") %></td>
+                                <td class="product-remove" data-title="Remove"><a href="#"><i class="ti-close"></i></a></td>
+                            </tr>
+ 
+<% }) %>
+
+                        </tbody>
+                        <tfoot>
+                        	<tr>
+                                <td colspan="4" class="px-0">
+                                   <h4>Total des produits </h4> 
+                                </td>
+
+                                <td>
+                                  <h4>  <%= panier.montantht.toLocaleString("fr-FR") %> <%= entreprise.devise %> </h4> 
+                                </td>
+                           
+
+
+                                <!--
+                                    <td colspan="6" class="px-0">
+                                        <div class="row g-0 align-items-center">
+
+                                    	<div class="col-lg-4 col-md-6 mb-3 mb-md-0">
+                                            <div class="coupon field_form input-group">
+                                                <input type="text" value="" class="form-control form-control-sm" placeholder="Enter Coupon Code..">
+                                                <div class="input-group-append">
+                                                	<button class="btn btn-fill-out btn-sm" type="submit">Apply Coupon</button>
+                                                </div>
+                                            </div>
+                                    	</div>
+                                        <div class="col-lg-8 col-md-6  text-start  text-md-end">
+                                            <button class="btn btn-line-fill btn-sm" type="submit">Update Cart</button>
+                                        </div>
+                                    </div>
+                                </td>
+                            -->
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                   
+
+<% } else { %>
+ <h2>Votre panier est vide </h2> <a href="/" class="btn btn-fill-out">Retour à la boutique</a>
+ 
+ <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+            	<div class="medium_divider"></div>
+            	<div class="divider center_icon"><i class="ti-shopping-cart-full"></i></div>
+            	<div class="medium_divider"></div>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col-md-6">
+            	<div class="heading_s1 mb-3">
+            		<h6>Calcul des frais de livraison</h6>
+                </div>
+                <div>
+                    selectionnez votre ville
+                </div>
+                <form class="field_form shipping_calculator">
+                    <div class="form-row">
+                        <div class="form-group col-lg-12 mb-3">
+                            <div class="custom_select">
+                                <select class="form-control">
+                                    <% villes.forEach(ville => { %>
+                                     <option value=<%= ville.id %>><%= ville.nom %></option>
+                                    <% }) %>
+                                   
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-6 mb-3">
+                           
+                                Commune
+                          
+                            <div class="custom_select">
+                                <select class="form-control">
+                                    <% villes.forEach(ville => { %>
+                                     <option value=<%= ville.id %>><%= ville.nom %></option>
+                                    <% }) %>
+                                   
+                                </select>
+                            </div>                        </div>
+                        <div class="form-group col-lg-6 mb-3">
+                            <div>
+                                Quartier
+                            </div>
+                            <div class="custom_select">
+                                <select class="form-control">
+                                    <% villes.forEach(ville => { %>
+                                     <option value=<%= ville.id %>><%= ville.nom %></option>
+                                    <% }) %>
+                                   
+                                </select>
+                            </div>                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-12 mb-3">
+                            <button class="btn btn-fill-line" type="submit">Update Totals</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6">
+            	<div class="border p-3 p-md-4">
+                    <div class="heading_s1 mb-3">
+                        <h6>Coût total du panier</h6>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td class="cart_total_label">Total des produit</td>
+                                    <td class="cart_total_amount"><%= panier.montantht.toLocaleString('fr-FR') %></td>
+                                </tr>
+                                <tr>
+                                    <td class="cart_total_label">Livraison</td>
+                                    <td class="cart_total_amount">Livraison gratuite</td>
+                                </tr>
+                                <tr>
+                                    <td class="cart_total_label">Total HT</td>
+                                    <td class="cart_total_amount"><strong><%= panier.montantht.toLocaleString('fr-FR') %> <%= entreprise.devise %></strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="/commande" class="btn btn-fill-out">Commandez</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SECTION SHOP -->
+
+
+</div>
+<!-- END MAIN CONTENT -->

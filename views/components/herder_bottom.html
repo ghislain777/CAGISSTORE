@@ -1,0 +1,100 @@
+<script>
+    let e= '<%-  JSON.stringify( entreprise) %>'; 
+     lentreprise = JSON.parse(e)
+   // console.log( lentreprise.devise)
+    let villes= '<%- JSON.stringify(villes) %>'; 
+        var panierjson = '<%- JSON.stringify(panier) %>'
+        var panier = JSON.parse(panierjson)
+        
+        var entreprise = JSON.parse('<%- JSON.stringify(entreprise) %>')
+        var utilisateur = JSON.parse('<%- JSON.stringify(utilisateur) %>')
+        var transporteurs = JSON.parse('<%- JSON.stringify(transporteurs) %>')
+        var moyendepayements = JSON.parse('<%- JSON.stringify(moyendepayements) %>')
+        var livraison = JSON.parse('<%- JSON.stringify(livraison) %>')
+</script>
+<div class="bottom_header dark_skin main_menu_uppercase">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg">
+            <a class="navbar-brand" href="/">
+                <img class="logo_light" src="<%= entreprise.logo %>" alt="logo" />
+                <img class="logo_dark" src="<%= entreprise.logo %>" alt="logo" />
+            </a>
+           <!--
+        
+        
+            <li><i class="ti-mobile"></i><span><%= entreprise.telephone %></span></li>
+            
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-expanded="false">
+                    <span class="ion-android-menu"></span>
+                </button>
+        -->
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+<!--
+    <li><i class="ti-location-pin"></i><span><%= entreprise.adresse %></span></li>
+--><% categories.forEach(categorie => { %>
+    <li class="dropdown">
+        <a data-bs-toggle="dropdown" class="nav-link dropdown-toggle" href="#"><%= categorie.nom %></a>
+        <div class="dropdown-menu">
+            <ul>
+                <% categorie.Souscategories.forEach(souscategorie => { %>
+                    
+ <li><a class="dropdown-item nav-link nav_item" href=  "/<%= souscategorie.id%>/<%= fonctions.toSEOFriend(souscategorie.nom)%>"><%= souscategorie.nom %></a></li>
+
+                <% }) %>
+                
+            </ul>
+        </div>
+    </li>
+
+    
+ 
+<% }) %>
+
+
+                       
+
+
+                    
+                    <li><a class="nav-link nav_item" href="contact.html">Nous contacter</a></li>
+                </ul>
+            </div>
+            <ul class="navbar-nav attr-nav align-items-center">
+                <li><a href="javascript:void(0);" class="nav-link search_trigger"><i class="linearicons-magnifier"></i></a>
+                    <div class="search_wrap">
+                        <span class="close-search"><i class="ion-ios-close-empty"></i></span>
+                        <form>
+                            <input type="text" placeholder="Search" class="form-control" id="search_input">
+                            <button type="submit" class="search_icon"><i class="ion-ios-search-strong"></i></button>
+                        </form>
+                    </div><div class="search_overlay"></div>
+                </li>
+                <li class="dropdown cart_dropdown"><a class="nav-link cart_trigger" href="#" data-bs-toggle="dropdown"><i class="linearicons-cart"></i><span id="totalPanier" class="cart_count"><%= panier?.totalproduits?? 0%></span></a>
+                    <div class="cart_box dropdown-menu dropdown-menu-right">
+                        <ul class="cart_list" id="panier">
+
+                            <% if (panier != null) { %>
+                             <% panier.Lignepaniers.forEach(ligne => { %>
+                                <li >
+                                    <a href="#" class="item_remove"><i class="ion-close" id="<%= ligne.id %>"></i></a>
+                                    <a href="#"><img src="<%= ligne.Produit.Media[0].fichier %>" alt="cart_thumb1"><%= ligne.Produit.nom %></a>
+                                    <span class="cart_quantity"> <%= ligne.quantite %> x <span class="cart_amount"> <span class="price_symbole"></span></span><%= ligne.prixunitaire %> GNF</span>
+                                </li>
+                            <% }) %>
+                            <% } %>
+
+                            
+
+                        </ul>
+                        <div class="cart_footer">
+                            <p class="cart_total"><strong>Total:</strong> <span class="cart_price"> <span class="price_symbole"></span></span><span id="prixTotal"><%= panier?.montantht?? 0 %></span></p>
+                            <p class="cart_buttons"><a href="/panier" class="btn btn-fill-line view-cart">Panier</a><a href="/commande" class="btn btn-fill-out checkout">Commander</a></p>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </nav>
+    </div>
+</div>

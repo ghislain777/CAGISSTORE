@@ -1,0 +1,327 @@
+<div class="accordion" id="accordionCommande">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFacturation">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseFacturation11" aria-expanded="true" aria-controls="collapseFacturation">
+                Adresse de facturation
+            </button>
+        </h2>
+        <div id="collapseFacturation" class="accordion-collapse collapse show" aria-labelledby="headingFacturation"
+            data-bs-parent="#accordionCommande">
+            <div class="accordion-body">
+                <div class="heading_s1">
+                    <h4>Adresse de facturation</h4>
+                </div>
+                <div class="payment_option">
+                    <% utilisateur.Adresses.forEach(adresse=> { %>
+                        <div class="custome-radio">
+                            <input class="form-check-input" <%=adresse.pardefaut ? 'checked' : '' %> required=""
+                            type="radio" name="adressefacturation_option" value="adresse<%= adresse.id %>"
+                                id="adressefacturation<%= adresse.id %>" adresse="<%= adresse.id %>">
+                                        <label class="form-check-label" for="adressefacturation<%= adresse.id %>">
+                                            <%= adresse.alias %> (<%= adresse.telephone %> - <%= adresse.Quartier.nom %>
+                                                        )
+                                        </label>
+                                        <p adressefacturation-data-method="adresse<%= adresse.id %>"
+                                            class="adressefacturation-text">
+                                            <%= adresse.nom %>
+                                                <%= adresse.prenom %>
+                                        </p>
+                        </div>
+                        <% }) %>
+                            <div class="custome-radio">
+                                <input class="form-check-input" type="radio" name="adressefacturation_option"
+                                    value="adresse0" id="adressefacturation0" adresse="0">
+                                <label class="form-check-label" for="adressefacturation0">
+                                    Nouvelle adresse
+                                </label>
+                                <p adressefacturation-data-method="adresse0" class="adressefacturation-text">
+                                    Nouvelle adresse de facturation
+                                </p>
+                            </div>
+                </div>
+
+
+
+
+                <div class="heading_s1">
+                    <h4>Adresse de facturation</h4>
+                </div>
+
+                <div id="nouvelleadresse">
+                    <form method="post">
+                        <div class="form-group mb-3">
+                            <label for="nom">Nom</label>
+                            <input class="form-control" type="text" value=<%=utilisateur.nom %> required
+                            class="form-control" name="nom" id="nom"
+                            placeholder="Nom *" formulaire="facturation">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" value=<%=utilisateur.prenom %> required class="form-control"
+                            name="prenom"
+                            id="prenom" placeholder="Prénom *" formulaire="facturation">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="telephone">Téléphone</label>
+                            <input type="text" value=<%=utilisateur.telephone %> required class="form-control"
+                            name="telephone" id="telephone" placeholder="Téléphone *" formulaire="facturation">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="adresse">Adresse physique</label>
+                            <input type="text" value="<%= utilisateur.adresse %>" class="form-control" name="adresse"
+                                id="adresse" placeholder="Adresse physique " formulaire="facturation">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="ville">Ville</label>
+                            <div class="custom_select">
+                                <select class="form-control" id="villedefacturation" value="">
+                                    <option value="">Ville *</option>
+                                    <% villes.forEach(ville=> { %>
+                                        <option value="<%= ville.id %>">
+                                            <%= ville.nom %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="commune">Commune</label>
+                            <div class="custom_select">
+                                <select id="communedefacturation"
+                                    class="form-control" "<%= utilisateur.Quartier.Commune.id %>">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="quartier">Quartier</label>
+                            <div class="custom_select">
+                                <select id="quartierdefacturation" class="form-control"
+                                    value="<%= utilisateur.Quartier.id %>">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="email">Email</label>
+                            <input class="form-control" required type="text" name="email" placeholder="Adresse email" value= <%= utilisateur.email %>
+                                formulaire="facturation">
+                        </div>
+                    </form>
+                </div>
+
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <a type="button" href="#" id="allerALivraison"
+                                class="btn btn-fill-out btn-block">Livraison&gt&gt </a>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingLivraison">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseLivraison11" aria-expanded="false" aria-controls="collapseLivraison">
+                Adresse de livraison
+            </button>
+        </h2>
+        <div id="collapseLivraison" class="accordion-collapse collapse" aria-labelledby="headingLivraison"
+            data-bs-parent="#accordionCommande">
+            <div class="accordion-body">
+
+
+                <div class="ship_detail">
+                    <div class="form-group mb-3">
+                        <div class="chek-form">
+                            <div class="custome-checkbox">
+                                <input class="form-check-input" checked type="checkbox" name="checkbox"
+                                    id="differentaddress">
+                                <label class="form-check-label label_info" for="differentaddress"><span>Livrer à
+                                        l'adresse de facturation?</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="different_address show">
+                        <div id="different_address">
+
+                            <div class="heading_s1">
+                                <h4> Adresse de livraison</h4>
+                            </div>
+                            <div class="payment_option">
+                                <% utilisateur.Adresses.forEach(adresse=> { %>
+                                    <div class="custome-radio">
+                                        <input class="form-check-input" <%=adresse.pardefaut ? 'checked' : '' %>
+                                        required=""
+                                        type="radio" name="adresselivraison_option" value="adresse<%= adresse.id %>"
+                                            id="adresselivraison<%= adresse.id %>" adresse="<%= adresse.id %>">
+                                                    <label class="form-check-label"
+                                                        for="adresselivraison<%= adresse.id %>">
+                                                        <%= adresse.alias %> (<%= adresse.telephone %> - <%=
+                                                                    adresse.Quartier.nom %>)
+                                                    </label>
+                                                    <p adresselivraison-data-method="adresse<%= adresse.id %>"
+                                                        class="adresselivraison-text">
+                                                        <%= adresse.nom %>
+                                                            <%= adresse.prenom %>
+                                                    </p>
+                                    </div>
+                                    <% }) %>
+                                        <div class="custome-radio">
+                                            <input class="form-check-input" type="radio" name="adresselivraison_option"
+                                                value="adresse0" id="adresselivraison0" adresse="0">
+                                            <label class="form-check-label" for="adresselivraison0">
+                                                Nouvelle adresse
+                                            </label>
+                                            <p adresselivraison-data-method="adresse0" class="adresselivraison-text">
+                                                Nouvelle adresse de livraison
+                                            </p>
+                                        </div>
+                            </div>
+
+
+
+
+
+
+                            <div id="nouvelleadresselivraison">
+
+                                <div class="form-group mb-3">
+                                    <label for="nom">Nom</label>
+                                    <input type="text" required class="form-control" name="nom" id="nomLivraison"
+                                        placeholder="Nom *" formulaire="livraison" value= <%= utilisateur.nom %>   >
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="prenom">Prénom</label>
+                                    <input type="text" required class="form-control" name="prenom" id="prenomLivraison" value = <%= utilisateur.prenom %>
+                                        placeholder="Prénom *" formulaire="livraison">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="Telephone">Télephone</label>
+                                    <input type="text" required class="form-control" name="telephoneLivraison" value = <%= utilisateur.telephone %>
+                                        id="telephoneLivraison" placeholder="Téléphone *" formulaire="livraison">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="adresse physique">Adresse physique</label>
+                                    <input type="text" required class="form-control" name="adresse" value = <%= utilisateur.adresse  %>
+                                        id="adresseLivraison" placeholder="Adresse " formulaire="livraison">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="ville">Ville*</label>
+                                    <div class="custom_select">
+                                        <select id="villedelivraison" class="form-control">
+                                            <option value="">Ville de livraison *</option>
+                                            <% villes.forEach(ville=> { %>
+                                                <option value=<%=ville.id %>><%= ville.nom %>
+                                                </option>
+                                                <% }) %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="commune">Commune*</label>
+                                    <div class="custom_select">
+                                        <select id="communedelivraison" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <div class="custom_select">
+                                        <select id="quartierdelivraison" class="form-control">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="email">Email</label>
+                                    <input class="form-control" required type="text" name="email" id="emailLivraison" value= <%= utilisateur.email %>
+                                        placeholder="Adresse email" formulaire="livraison">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-4 bg-light">
+                                <a type="button" href="#" id="allerAFacturation" class="btn btn-info"> &lt&ltFacturation
+                                </a>
+
+                            </div>
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4 bg-light text-right">
+                                <a type="button" href="#" id="allerATransporteur"
+                                    class="btn btn-fill-out btn-block">Transport&gt&gt
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingTransporteur">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapseTransporteur11" aria-expanded="false" aria-controls="collapseTransporteur">
+                Transporteur
+            </button>
+        </h2>
+        <div id="collapseTransporteur" class="accordion-collapse collapse" aria-labelledby="headingTransporteur"
+            data-bs-parent="#accordionCommande">
+            <div class="accordion-body">
+
+                <div class="heading_s1">
+                    <h4>Transporteur</h4>
+                </div>
+                <div class="payment_option">
+                    <% transporteurs.forEach(transporteur=> { %>
+                        <div class="custome-radio">
+                            <input class="form-check-input" <%=transporteur.defaut ? 'checked' : '' %> required=""
+                            type="radio" name="transporteur_option" value="transporteur<%= transporteur.id %>"
+                                id="transporteur<%= transporteur.id %>" transporteur="<%= transporteur.id %>">
+                                        <label class="form-check-label" for="transporteur<%= transporteur.id %>">
+                                            <%= transporteur.nom %>
+                                        </label>
+                                        <p transporteur-data-method="transporteur<%= transporteur.id %>"
+                                            class="transporteur-text">
+                                            <%= transporteur.description %>
+                                        </p>
+                        </div>
+                        <% }) %>
+                </div>
+                <br />
+                <div class="heading_s1">
+                    <h4>Frais de livraison</h4>
+
+                    <div> Coût de livraison: <strong name="fraisdelivraison" id="fraisdelivraison"></strong></div>
+                    <div> Délais de livraison: <strong name="delaisdelivraison" id="delaisdelivraison"> </strong></div>
+                </div>
+
+                <div class="heading_s1">
+                    <h4>Notes à joindre à votre commande</h4>
+                </div>
+                <div class="form-group mb-0">
+                    <textarea rows="5" class="form-control"
+                        placeholder="saisissez ici la note pour accompagner votre commande"></textarea>
+                </div>
+                </form>
+                <div>
+                    <a type="button" href="#" id="retourALivraison" class="btn btn-info">&lt&ltLivraison </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

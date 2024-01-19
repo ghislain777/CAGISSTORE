@@ -1,0 +1,81 @@
+
+
+<footer class="footer_dark">
+	<div class="footer_top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-12">
+                	<div class="widget">
+                        <div class="footer_logo">
+                            <a href="/"><img src="<%= entreprise.logo %>" alt="logo"/></a>
+                        </div>
+                        <p><%= composants.piedDePage.slogan %></p>
+                    </div>
+                    <div class="widget">
+                        <ul class="social_icons social_white">
+                            <li><a href="<%= composants.piedDePage.resauxSociaux.facebook %>"><i class="ion-social-facebook"></i></a></li>
+                            <li><a href="<%= composants.piedDePage.resauxSociaux.tweeter %>"><i class="ion-social-twitter"></i></a></li>
+                            <li><a href="<%= composants.piedDePage.resauxSociaux.youtube %>"><i class="ion-social-youtube-outline"></i></a></li>
+                            <li><a href="<%= composants.piedDePage.resauxSociaux.instagram %>"><i class="ion-social-instagram-outline"></i></a></li>
+                        </ul>
+                    </div>
+        		</div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                	<div class="widget">
+                        <h6 class="widget_title"><%= composants.piedDePage.liensUtiles.nom %></h6>
+                        <ul class="widget_links">
+                            <% composants.piedDePage.liensUtiles.liens.forEach(lien => { %>
+                             <li><a href="<%= lien.lien %>"><%= lien.nom %></a></li>
+                            <% }) %>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                	<div class="widget">
+                        <h6 class="widget_title"><%= composants.piedDePage.categories.nom %></h6>
+                        <ul class="widget_links">
+
+                            <% composants.piedDePage.categories.categories.forEach(categorie => { %>
+                             <li><a href="<%= categorie.lien %>"><%= categorie.nom %></a></li>
+                            <% }) %>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-sm-6">
+                	<div class="widget">
+                        <h6 class="widget_title"><%= composants.piedDePage.moncompte.nom %></h6>
+                        <ul class="widget_links">
+
+                            <% composants.piedDePage.moncompte.liens.forEach(lien => { %>
+                             <li><a href="<%= lien.lien %>"><%= lien.nom %></a></li>
+                            <% }) %>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                	<div class="widget">
+                        <h6 class="widget_title">Nos contacts</h6>
+                        <ul class="contact_info contact_info_light">
+                            <li>
+                                <i class="ti-location-pin"></i>
+                                <p><%= entreprise.adresse %></p>
+                            </li>   
+                            <li>
+                                <i class="ti-email"></i>
+                                <a href="mailto:info@sitename.com"><%= entreprise.email %></a>
+                            </li>
+                            <li>
+                                <i class="ti-mobile"></i>
+                                <p><%= entreprise.telephone %></p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</footer>

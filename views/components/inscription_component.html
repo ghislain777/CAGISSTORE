@@ -1,0 +1,69 @@
+
+<!-- SECTION REGISTER.......-->
+
+
+<div class="login_register_wrap section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-md-10">
+                <div class="login_wrap">
+            		<div class="padding_eight_all bg-white">
+                        <div class="heading_s1">
+                            <h3>Création de compte</h3>
+                        </div>
+                        <form id="formulaire_client" method="post">
+                            <div class="form-group mb-3">
+                                <input type="text" id="nom" class="form-control" name="nom" placeholder="Nom*">
+                                <div class="invalid-feedback">Le nom est obligatoire</div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text"  class="form-control" name="prenom" id="prenom" placeholder="Prénom*">
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text"  class="form-control" name="telephone" id="telephone" placeholder="Téléphone*">
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="ville">Ville*</label>
+                                <select class="form-control" name="ville" id="ville" placeholder="Ville*">
+                                    <% villes.forEach(ville => { %>
+                                        <option value=<%= ville.id  %> ><%= ville.nom %></option>
+                                    <% }) %>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="ville">Commune*</label>
+                                <select class="form-control" name="commune" id="commune" aria-placeholder="commune">
+                                    <option value="1">Dixinn</option>
+                                    <option value="2">Kaloum</option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-3">
+                                <input type="text"  class="form-control" name="email" id="email" placeholder="Adresse Email">
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <input class="form-control"  type="motdepasse" name="motdepasse" placeholder="Mot de passe*">
+                            </div>
+                            
+                            <div class="login_footer form-group mb-3">
+                                <div class="chek-form">
+                                   
+                                </div>
+                            </div>
+                            <div class="form-group mb-3">
+                                <button id="enregistrer"  class="btn btn-fill-out btn-block">Enregistrer</button>
+                            </div>
+                        </form>
+                       
+                        
+                        <div class="form-note text-center">Déjà inscrit? <a href="login">Connexion</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!------END SECTION REGISTER----->

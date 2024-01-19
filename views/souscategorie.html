@@ -1,0 +1,61 @@
+<%- include('sections/start.html') %>
+<!-- End Screen Load Popup Section --> 
+<!-- START HEADER -->
+    <%- include('sections/header.html') %>
+<!-- END HEADER -->
+
+<!-- START SECTION BREADCRUMB -->
+ <%- include('sections/breadcrumb.html') %> 
+<!-- END SECTION BREADCRUMB -->
+<%# include('sections/banner_slider.html') %>
+<!-- START MAIN CONTENT -->
+<div class="main_content">
+
+<!-- START 404 SECTION -->
+
+<% if (souscategorie.Produits.length === 0) { %>
+    <div class="row">
+        <div class="col-12">
+
+            <div class="row shop_container">
+
+
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6 col-md-10 order-lg-first">
+                <div class="text-center">
+                    <h5 class="mb-2 mb-sm-3">oops! pas de produit dans cette catégorie</h5> 
+                    <p>Désolé, aucun produit trouvé ans cette catégorie.</p>
+                    <div class="search_form pb-3 pb-md-4">
+                       <!--
+                         <form method="post">
+                             <input name="text" id="text" type="text" placeholder="Search" class="form-control">
+                             <button type="submit" class="btn icon_search"><i class="ion-ios-search-strong"></i></button>
+                         </form>
+                     -->
+                   
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<% } else { %>
+ <%- include('./sections/categorie_section.html') %>
+<% } %>
+
+<!-- END 404 SECTION -->
+
+
+
+</div>
+<!-- END MAIN CONTENT -->
+
+<!-- START FOOTER -->
+    <%#- include('sections/footer.html') %>
+<!-- END FOOTER -->
+
+<!-- START FOOTER -->
+<%- include('sections/footer.html') %>
+<!-- END FOOTER -->
+<%- include('sections/end.html') %>

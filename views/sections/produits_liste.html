@@ -1,0 +1,78 @@
+<div class="section small_pt pb_70">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+            	<div class="heading_s1 text-center">
+                	<h2>Nos produits en exclisivité</h2>
+                </div>
+            </div>
+		</div>
+        <div class="row">
+        	<div class="col-12">
+            	<div class="tab-style1">
+                    <ul class="nav nav-tabs justify-content-center" role="tablist">
+
+                        <% categories.forEach(categorie => { %>
+                            <li class="nav-item">
+                            <a class="nav-link " id="arrival-tab" data-bs-toggle="tab" href="#arrival" role="tab" aria-controls="arrival" aria-selected="false"><%= categorie.nom %></a>
+                        </li>
+                         
+                        <% }) %>
+
+
+                            
+                    </ul>
+                </div>
+                <div class="tab-content">
+                	<div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
+                        <div class="row shop_container">
+
+
+<% produits.forEach(produit => { %>
+    <div class="col-lg-3 col-md-4 col-6">
+        <div class="item" ">
+            <div class="product">
+                
+                    <a href="/detail/<%= produit.id %> ">
+                        <div class="product_img">
+                        <img src="<%= produit.Media[0].fichier %>" alt="<%= produit.nom %>">
+                         </div>
+                    </a>
+                    
+               
+                <div class="product_info">
+                    <h6 class="product_title"><a href="shop-product-detail.html"><%= produit.nom  %></a></h6>
+                    <div class="product_price">
+                        <span class="price"><%= produit.prixdevente.toLocaleString("fr-FR")  %> <%= entreprise.devise  %> </span>
+                        <del></del>
+                        <div class="on_sale">
+                            <span></span>
+                        </div>
+                        <li class="add-to-cart" id="<%= produit.id %>"><a href="#"><i class="icon-basket-loaded"></i> Ajouter au panier</a></li>
+                    </div>
+                    <div class="rating_wrap">
+                      
+                    
+                    </div>
+                    <div class="pr_desc">
+                        <p><%= produit.description %></p>
+                    </div>
+                    <div class="pr_switch_wrap">
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+ 
+<% }) %>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</div>

@@ -1,0 +1,60 @@
+{
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#07871a",
+    "statusBar.background": "#07871a"
+  },
+    "explorerTerminal.showDockerCommands": true,
+  "explorerTerminal.commands": [
+    {
+      "name": "sequelize create database",
+      "auto": false, 
+      "command":"npx sequelize-cli db:create",
+      "multi": false
+    },
+    {
+      "name": "sequelize create model",
+      "auto": false, 
+      "command":"npx sequelize-cli model:generate --attributes nom:string, --name  ",
+      "multi": true
+    },
+    {
+      "name": "sequelize-mig migrate",
+      "auto": false, 
+      "command":"npx sequelize-cli db:migrate",
+      "multi": true
+    },
+    {
+      "name": "sequelize-mig seed",
+      "auto": false, 
+      "command":"npx sequelize-cli db:seed:all",
+      "multi": false
+    },
+    
+    {
+      "name": "sequelize-mig create migration ",
+      "auto": false, 
+      "command":"sequelize-mig migration:make -n",
+      "multi": true
+    },
+    {
+      "name": "sequelize reset DB ",
+      "auto": false, 
+      "command":"npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
+      "multi": false
+    },
+    {
+      "name": "sequelize seed file ",
+      "auto": false, 
+      "command":"npx sequelize db:seed --seed fichier.js",
+      "multi": false
+    },
+    {
+      "name": "sequelize seed generate ",
+      "auto": false, 
+      "command":"npx sequelize-cli seed:generate --name table",
+      "multi": true
+    },
+    
+  ]
+
+}

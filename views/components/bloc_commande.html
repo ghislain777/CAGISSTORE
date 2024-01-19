@@ -1,0 +1,58 @@
+<div class="order_review">
+    <div class="heading_s1">
+        <h4>Votre commande</h4>
+    </div>
+    <div class="table-responsive order_table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Produits</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <% panier.Lignepaniers.forEach(ligne => { %>
+                  <tr>
+                    <td><%= ligne.Produit.nom %> <span class="product-qty">x <%= ligne.quantite %></span></td>
+                    <td><%= ligne.prixtotal.toLocaleString("fr-FR") %> </td>
+                </tr>
+                <% }) %>
+               
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>Sous-total</th>
+                    <td class="product-subtotal"><%= panier.montantht.toLocaleString("fr-FR") %> </td>
+                </tr>
+                <tr>    
+                    <th>Livraison</th>
+                    <td id="livraisoncommande">Livraison gratuite</td>
+                </tr>
+                <tr>
+                    <th>TVA(<%= entreprise.tva %>%)</th>
+                    <td><%= panier.montanttaxe.toLocaleString("fr-FR") %></td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td class="product-subtotal"><%= (panier.montantttc + livraison.fraisdelivraison).toLocaleString("fr-FR") %> <%= entreprise.devise %></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <div class="payment_method">
+        <div class="heading_s1">
+            <h4>Mode de payement</h4>
+        </div>
+        <div class="payment_option">
+            <% moyendepayements.forEach(moyen => { %>
+               <div class="custome-radio">
+                <input class="form-check-input" <%= moyen.defaut ? 'checked' : '' %> required="" type="radio" name="payment_option" value="moyen<%= moyen.id %>" id="moyen<%= moyen.id %>" moyen="<%= moyen.id %>">
+                <label class="form-check-label" for="moyen<%= moyen.id %>"><%= moyen.nom %></label>
+                <p data-method="moyen<%= moyen.id %>" class="payment-text"><%= moyen.description %>. </p>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+    <a id="commander" aria-disabled="true" href="#" class="btn btn-fill-out btn-block">Confirmez la commande</a>
+</div>
