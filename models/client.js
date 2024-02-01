@@ -75,5 +75,22 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true,
         timestamps: true
     });
+
+// on cree une acresse par défaut pour haque nouveau client
+Client.afterCreate("hookAC", async (client, options) => {
+    await sequelize.models.Adresse.create({
+        client:client.id,
+        alias:"Adresse par defaut",
+        telephone:client.telephone,
+        adresse: client.adresse,
+        pardefaut:true,
+        quartier:client.quartier,
+        prenom:client.prenom,
+        nom:client.nom
+        
+    })
+
+  })
+
     return Client;
 };

@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             comment: "Alias de l'adresse"
         },
-        Nom: {
+        nom: {
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: "",

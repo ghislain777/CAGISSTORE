@@ -147,7 +147,7 @@ webController.details = async (req, res) => {
 
 webController.inscription = async (req, res) => {
     const errors = validationResult(req).errors
-    console.log(errors)
+    //console.log(errors)
     const parametre = req.parametre
     parametre.page = {
         nom: "Inscription",
@@ -162,10 +162,10 @@ webController.inscription = async (req, res) => {
     })
     //console.log(villes)
     parametre.villes = villes
-    console.log(req.method)
+    //console.log(req.method)
     if (req.method == 'GET') {
         // verification de la variable session
-        console.log(req.session)
+       // console.log(req.session)
         res.render('inscription.html', parametre)
 
     }
@@ -202,10 +202,18 @@ webController.inscription = async (req, res) => {
                 } else {
                     // on inscrit le client
                     const utilisateur = await Client.create(req.body)
-                    parametre.utilisateur = utilisateur
+
+                    const client = await Client.findOne({
+                        where:{
+                            id: utilisateur.id
+                        },
+                        include:[{model:Adresse, include:[{model:Quartier, include:[{model:Commune, include:[Ville]}]}]}, {model:Quartier, include:[{model:Commune, include:[Ville]}]}]
+                
+                    })
+                    parametre.utilisateur = client
                     parametre.commandes = []
-                    req.session.utilisateur = utilisateur
-                    res.render('inscription.html', parametre)
+                    req.session.utilisateur = client
+                    res.render('profil.html', parametre)
                 }
 
             }

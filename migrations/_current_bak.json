@@ -393,6 +393,12 @@
                     "field": "datepayement",
                     "seqType": "Sequelize.DATE"
                 },
+                "datedelivraison": {
+                    "allowNull": true,
+                    "comment": "Date de livraison",
+                    "field": "datedelivraison",
+                    "seqType": "Sequelize.DATE"
+                },
                 "client": {
                     "allowNull": true,
                     "name": "client",
@@ -1569,5 +1575,5 @@
     "path": "/home/ghislain/Documents/2023/1-PROJETS/BINTABUSINESS/backend/migrations/_current.json",
     "backupPath": "/home/ghislain/Documents/2023/1-PROJETS/BINTABUSINESS/backend/migrations/_current_bak.json",
     "exists": true,
-    "revision": 26
+    "revision": 27
 }

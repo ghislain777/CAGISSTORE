@@ -2,13 +2,13 @@ $(function () {
 console.log(utilisateur)
 const lesvilles = JSON.parse(villes)
 // on ajoute la commune du client et on le selectionne
-$("#commune").append(`<option value=${utilisateur.Quartier.Commune.id}>${utilisateur.Quartier.Commune.nom}</option>`);
-$("#commune").val(utilisateur.Quartier.Commune.id);
+$("#commune").append(`<option value=${utilisateur?.Quartier?.Commune?.id?? ""}>${utilisateur?.Quartier?.Commune?.nom?? ""}</option>`);
+$("#commune").val(utilisateur?.Quartier?.Commune?.id?? "");
 
-$("#quartier").append(`<option value=${utilisateur.Quartier.id}>${utilisateur.Quartier.nom}</option>`);
-$("#quartier").val(utilisateur.Quartier.id);
+$("#quartier").append(`<option value=${utilisateur?.Quartier?.id?? ""}>${utilisateur?.Quartier?.nom?? ""}</option>`);
+$("#quartier").val(utilisateur?.Quartier?.id?? "");
 
-$("#ville").val(utilisateur.Quartier.Commune.Ville.id);
+$("#ville").val(utilisateur?.Quartier.Commune?.Ville?.id?? "");
 
 // on charge les quartiers et les communes
 

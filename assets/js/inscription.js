@@ -1,21 +1,81 @@
 $(function () {
     var formulaireClient = $("#formulaire_client")
+const lesvilles = JSON.parse(villes)
+
+    // on initialise le formulaire avec le client par defaut
+
+    const client = {
+        nom:"",
+        prenom :"",
+        email:"",
+        quartier:"",
+        adresse:"",
+        motdepasse:"",
+
+    }
+
+$("#ville").empty();
+$("#commune").empty();
+$("#quartier").empty();
+
+// on charge les villes
+$("#ville").append(` <option value= "" >Choisir votre ville</option>`);
+
+lesvilles.forEach((ville) => {
+    $("#ville").append(` <option value= "${ville.id}" >${ville.nom}</option>`);
+});
 
 // villes est une vatiabl ejs à retrouver dans le fichier inscription_component.html
-    const lesvilles = JSON.parse(villes)
+    
+$("#ville").change(function (e) {
+    e.preventDefault();
+    $("#commune").empty();
+    $("#quartier").empty();
 
-    $("#ville").change(function () {
-        const ville = $("#ville").val();
-        // on cherche la ville
-        let index = lesvilles.findIndex((v) => v.id == ville)
-        const laville = lesvilles[index]
-        $("#commune").empty();
-        laville.Communes.forEach((commune) => {
-            $("#commune").append(
-                `<option value= "${commune.id}" >${commune.nom}</option>`
-            );
-        });
-    });
+    // on recupere toutes les communes de la ville...
+    $.ajax({
+        type: "GET",
+        url: `/api/communes?ville=${e.target.value}`,
+        data: {},
+        dataType: "application/json",
+        statusCode: {
+            200: function (res, status, error) {
+                var lescommunes = JSON.parse(res.responseText)
+                $("#commune").append(`<option value="">Choisir votre commune*</option>`)
+                lescommunes.rows.forEach((commune) => {
+                    $("#commune").append(`<option value=${commune.id}>${commune.nom}</option>`);
+                });
+
+            }
+        }
+    })
+
+});
+
+
+$("#commune").change(function (e) {
+    e.preventDefault();
+    $("#quartier").empty();
+
+    // on recupere toutes les communes de la ville...
+    $.ajax({
+        type: "GET",
+        url: `/api/quartiers?commune=${e.target.value}`,
+        data: {},
+        dataType: "application/json",
+        statusCode: {
+            200: function (res, status, error) {
+                var lesquartiers = JSON.parse(res.responseText)
+                $("#quartier").append(`<option value="">Choisir votre quartier*</option>`)
+                lesquartiers.rows.forEach((quartier) => {
+                    $("#quartier").append(`<option value=${quartier.id}>${quartier.nom}</option>`);
+                });
+
+            }
+        }
+    })
+
+});
 
 
     $("#enregistrer").click(function (e) {
@@ -47,12 +107,15 @@ $(function () {
                     required: true
                 },
                 email: {
-                    required: false,
+                    required: true,
                     email: true
                 },
                 motdepasse: {
                     required: true
 
+                },
+                quartier: {
+                    required:true
                 }
 
             },
@@ -62,9 +125,10 @@ $(function () {
                 telephone: "Le téléphone est requis",
                 motdepasse: "Mot de passe requis",
                 email: {
-                    required: "l'adresse email est requise",
-                    email: "format de mail non valide"
-                }
+                    required: "L'adresse email est requise",
+                    email: "Format de mail non valide"
+                },
+                quartier:"Le quartier est requis"
             }
         })
     }
