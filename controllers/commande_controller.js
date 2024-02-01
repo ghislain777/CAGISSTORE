@@ -41,6 +41,8 @@ commandeController.add = async (req, res) => {
         livrerAladresseDeFacturation
         } = req.body
     
+        console.log(req.body)
+        
     let facturationAddress ;
     let deliveryAddress;
     //try {
@@ -93,7 +95,7 @@ commandeController.add = async (req, res) => {
         statutcommande:1,
         delaisdelivraison:`${delaisdelivraison} jours`,
         montantht:+montantht,
-        montantttc:(+montantttc) + (+montanttransport) + (+montanttaxe),
+        montantttc:(+montantttc) + (+montanttransport),
         totalproduits:+montantttc,
         montanttaxe:+montanttaxe,
         montanttransport:+montanttransport,

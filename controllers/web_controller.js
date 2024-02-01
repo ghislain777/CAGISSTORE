@@ -49,8 +49,8 @@ webController.panier = (req, res) => {
 }
 
 webController.commande = (req, res) => {
-    console.log("Nouvel utilisateur")
-    console.log(req.parametre.utilisateur)
+   // console.log("Nouvel utilisateur")
+   // console.log(req.parametre.utilisateur)
     res.render('commande.html', req.parametre)
 }
 
@@ -59,8 +59,6 @@ webController.login = async (req, res) => {
 }
 
 webController.profil = async (req, res) => {
-
-
     res.render('profil.html', req.parametre)
 }
 
