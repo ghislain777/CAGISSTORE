@@ -447,10 +447,22 @@
                     "onUpdate": "CASCADE",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "adresse": {
+                "adressedelivraison": {
                     "allowNull": true,
-                    "name": "adresse",
-                    "field": "adresse",
+                    "name": "adressedelivraison",
+                    "field": "adressedelivraison",
+                    "references": {
+                        "model": "adresse",
+                        "key": "id"
+                    },
+                    "onDelete": "SET NULL",
+                    "onUpdate": "CASCADE",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "adressedefacturation": {
+                    "allowNull": true,
+                    "name": "adressedefacturation",
+                    "field": "adressedefacturation",
                     "references": {
                         "model": "adresse",
                         "key": "id"
@@ -1575,5 +1587,5 @@
     "path": "/home/ghislain/Documents/2024/CAGISTORE/backend/migrations/_current.json",
     "backupPath": "/home/ghislain/Documents/2024/CAGISTORE/backend/migrations/_current_bak.json",
     "exists": true,
-    "revision": 28
+    "revision": 29
 }

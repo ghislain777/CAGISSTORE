@@ -11,13 +11,16 @@
             Moyendepayement,
              Adresse,
               Statutcommande,
-              Parametre
+              Parametre,
+              Quartier,
+              Commune,
+              Ville
              } = require('../models');
 const ImpressionCommandeService = require('../services/documents/commande/impression_commande_service');
     const commandeController = {}
     
  commandeController.includeCommande = [
-    Client,Panier,Transporteur,Moyendepayement,Adresse,Statutcommande,]
+    Client,Panier,Transporteur,Moyendepayement,{model:Adresse, as:'livraison', include:[{model:Quartier, include:[{model:Commune, include:[Ville]}]}]}, 'facturation',Statutcommande,]
 
  
 //****Ajout d'une nouvelle commande */
@@ -47,7 +50,7 @@ commandeController.add = async (req, res) => {
     let deliveryAddress;
     //try {
         
-        if(adressedefacturation.id == 0 || nouvelleAdressefacturation == true) {
+        if(adressedefacturation.id == 0 || nouvelleAdressefacturation == 'true') {
             // c'est une nouvelle adresse de facturation
             facturationAddress = await Adresse.create({
                 alias:`${adressedefacturation.nom} ${adressedefacturation.prenom}`,

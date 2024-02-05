@@ -85,13 +85,13 @@
                     "field": "alias",
                     "seqType": "Sequelize.STRING"
                 },
-                "Nom": {
+                "nom": {
                     "allowNull": false,
                     "defaultValue": {
                         "value": ""
                     },
                     "comment": "Nom",
-                    "field": "Nom",
+                    "field": "nom",
                     "seqType": "Sequelize.STRING"
                 },
                 "prenom": {
@@ -1572,8 +1572,8 @@
             "indexes": []
         }
     },
-    "path": "/home/ghislain/Documents/2023/1-PROJETS/BINTABUSINESS/backend/migrations/_current.json",
-    "backupPath": "/home/ghislain/Documents/2023/1-PROJETS/BINTABUSINESS/backend/migrations/_current_bak.json",
+    "path": "/home/ghislain/Documents/2024/CAGISTORE/backend/migrations/_current.json",
+    "backupPath": "/home/ghislain/Documents/2024/CAGISTORE/backend/migrations/_current_bak.json",
     "exists": true,
-    "revision": 27
+    "revision": 28
 }

@@ -20,7 +20,8 @@ return new Promise((resolve, reject) => {
             {model:Statutcommande},
             {model:Transporteur},
             {model:Moyendepayement},
-            {model:Adresse},
+            'livraison',
+            'facturation',
             {model:Panier, include:[{model:Lignepanier, include:[{model: Produit, include:[{model:Media}]}]}]}
         ]
     })

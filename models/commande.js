@@ -67,21 +67,40 @@ module.exports = (sequelize, DataTypes) => {
                     allowNull: true
                 }
             })
-            // adresse
+            // adresse de livraison
             this.belongsTo(models.Adresse, {
+                as:'livraison',
                 foreignKey: {
-                    name: 'adresse',
-                    field: "adresse",
+                    name: 'adressedelivraison',
+                    field: "adressedelivraison",
                     allowNull: true
                 }
             })
             models.Adresse.hasMany(this, {
                 foreignKey: {
-                    name: "adresse",
-                    field: "adresse",
+                    name: "adressedelivraison",
+                    field: "adressedelivraison",
                     allowNull: true
                 }
             })
+
+             // adresse de facturation
+             this.belongsTo(models.Adresse, {
+                as:'facturation',
+                foreignKey: {
+                    name: 'adressedefacturation',
+                    field: "adressedefacturation",
+                    allowNull: true
+                }
+            })
+            models.Adresse.hasMany(this, {
+                foreignKey: {
+                    name: "adressedefacturation",
+                    field: "adressedefacturation",
+                    allowNull: true
+                }
+            })
+
 
             // statutcommande
             this.belongsTo(models.Statutcommande, {
