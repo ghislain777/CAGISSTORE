@@ -76,11 +76,11 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: true
     });
 
-// on cree une acresse par défaut pour haque nouveau client
+// on cree une adresse par défaut pour chaque nouveau client
 Client.afterCreate("hookAC", async (client, options) => {
     await sequelize.models.Adresse.create({
         client:client.id,
-        alias:"Adresse par defaut",
+        alias:"Mon adresse",
         telephone:client.telephone,
         adresse: client.adresse,
         pardefaut:true,
