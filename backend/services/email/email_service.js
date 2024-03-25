@@ -111,7 +111,7 @@ const sendEmailClient= async (leclient, evenement) => {
   const sender = `${parametresEmail.senderName} < ${parametresEmail.senderEmail} >`
   console.log(sender)
 
-  const contenu = contenuEmailClient(leclient, evenement)
+  const contenu = contenuEmailClient(leclient, evenement, parametresEmail)
   ejs.renderFile(__dirname + '/template_email_client.ejs', {leclient, contenu, imagesEmail, parametresEmail}, (err, data) => {
     if (err) {
       console.log(err);

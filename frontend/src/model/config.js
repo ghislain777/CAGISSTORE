@@ -8,7 +8,7 @@ export const serveurTest = `kitaci.zentechnologies.net`
 export const homepage = "/admin"
 
 const serveurDev = `127.0.0.1:8000`
-var mode = "prod";
+var mode = "dev";
 
 //export const serveur = serveurLive 
 export const serveur = mode === "dev"
