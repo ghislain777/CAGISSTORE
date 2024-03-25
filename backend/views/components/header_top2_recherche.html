@@ -1,0 +1,72 @@
+<div class="middle-header dark_skin">
+    <div class="container">
+        <div class="nav_block">
+            <a class="navbar-brand" href="/">
+                <img class="logo_light" src="<%= entreprise.logo %>" alt="logo">
+                <img class="logo_dark" src="<%= entreprise.logo %>" alt="logo">
+            </a>
+            <div class="product_search_form radius_input search_form_btn">
+                <form>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="custom_select">
+                                <select class="first_null not_chosen">
+                                    <option value=0>Toutes les catégories</option>
+                                    <% categories.forEach(categorie => { %>
+                                        <option value=<%= categorie.id %>><%= categorie.nom %></option>
+                                    <% }) %>
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        <input class="form-control" placeholder="rechercher un produit..." required="" type="text">
+                        <button type="submit" class="search_btn3">Rechercher</button>
+                    </div>
+                </form>
+            </div>
+            <ul class="navbar-nav attr-nav align-items-center">
+                <!--
+                    <li><a href="#" class="nav-link"><i class="linearicons-user"></i></a></li>
+                            -->
+                <% if (typeof utilisateur === 'undefined' || utilisateur == null) { %>
+                    <li><a href="/login"><i class="linearicons-user"></i><span></span></a></li>
+                 
+                <% } else { %>
+                    <li><a href="/profil"><i class="linearicons-user"></i><span><%= utilisateur.nom %> <%= utilisateur.prenom %></span></a></li>                        
+                <% } %>
+
+                <!--
+                            
+                    <li><a href="#" class="nav-link"><i class="linearicons-heart"></i><span class="wishlist_count">0</span></a></li>
+                            -->
+
+                            <li class="dropdown cart_dropdown">
+                                <a class="nav-link cart_trigger" href="#" data-bs-toggle="dropdown"><i class="linearicons-cart"></i><span id="totalPanier" class="cart_count"><%= panier?.totalproduits?? 0%></span><span class="amount"><%= (panier?.montantht?? 0).toLocaleString("fr-FR") %></span></a>
+                                <div class="cart_box dropdown-menu dropdown-menu-right">
+                                    <ul class="cart_list" id="panier">
+            
+                                        <% if (panier != null) { %>
+                                         <% panier.Lignepaniers.forEach(ligne => { %>
+                                            <li >
+                                                <a href="#" class="item_remove"><i class="ion-close" id="<%= ligne.id %>"></i></a>
+                                                <a href="#"><img src="<%= ligne.Produit.Media[0].fichier %>" alt="cart_thumb1"><%= ligne.Produit.nom %></a>
+                                                <span class="cart_quantity"> <%= ligne.quantite %> x <span class="cart_amount"> <span class="price_symbole"></span></span><%= ligne.prixunitaire.toLocaleString("fr-FR")  %> GNF</span>
+                                            </li>
+                                        <% }) %>
+                                        <% } %>
+            
+                                        
+            
+                                    </ul>
+                                    <div class="cart_footer">
+                                        <p class="cart_total"><strong>Total:</strong> <span class="cart_price"> <span class="price_symbole"></span></span><span id="prixTotal"><%= (panier?.montantht?? 0).toLocaleString("fr-FR")  %></span></p>
+                                        <p class="cart_buttons"><a href="/panier" class="btn btn-fill-line view-cart">Panier</a><a href="/commande" class="btn btn-fill-out checkout">Commander</a></p>
+                                    </div>
+                                </div>
+                            </li>
+
+                
+            </ul>
+        </div>
+    </div>
+</div>

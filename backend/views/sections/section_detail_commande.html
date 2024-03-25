@@ -1,0 +1,137 @@
+<div>
+     <% if (utilisateur === null) { %>
+      <%- include('../components/login_component.html') %>
+     <% } else { %>
+        <div class="main_content">
+<div class="container pt-3">
+
+        <a href="/profil" class="btn btn-fill-out">Retour à l'historique</a>
+    
+</div>
+        <!-- START SECTION SHOP -->
+        <div class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="table-responsive shop_cart_table">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">&nbsp;</th>
+                                        <th class="product-name">Produit</th>
+                                        <th class="product-price">Prix unitaire</th>
+                                        <th class="product-quantity">Quantité</th>
+                                        <th class="product-subtotal">Total panier</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <% commande.Panier.Lignepaniers.forEach(ligne => { %>
+                                     
+                                   
+                                    <tr>
+                                        <td class="product-thumbnail"><a href="#"><img src="<%= ligne.Produit.Media[0].fichier %>" alt=<%= ligne.Produit.nom %>></a></td>
+                                        <td class="product-name" data-title="Product"><a href="#"><%= ligne.Produit.nom %> </a></td>
+                                        <td class="product-price" data-title="Price"><%= ligne.prixunitaire.toLocaleString("fr-FR") %></td>
+                                        <td class="product-price" data-title="Price"><%= ligne.quantite.toLocaleString("fr-FR")%></td>
+                                          <td class="product-subtotal" data-title="Total"><%= ligne.prixtotal.toLocaleString("fr-FR") %> </td>
+                                    </tr>
+                                    <% }) %>
+                                    
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="6" class="px-0">
+                                            <div class="row g-0 align-items-center">
+        
+                                                <div class="col-lg-4 col-md-6 mb-3 mb-md-0">
+                                                   <h5>Total </h5>
+                                                </div>
+                                                <div class="col-lg-8 col-md-6 text-end  product-subtotal">
+                                                    <%= commande.montantht.toLocaleString("fr-FR") %>  <%= entreprise.devise %>
+
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="medium_divider"></div>
+                        <div class="divider center_icon"><i class="ti-shopping-cart-full"></i></div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="border p-3 p-md-4">
+                            <div class="heading_s1 mb-3">
+                                <h6>Adresse de livraison</h6>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                        
+                                            <td colspan="2" class="cart_total_amount">   <%= commande.livraison.nom %> <%= commande.livraison.prenom %>  <br/> 
+                                                téléphone: <%= commande.livraison.telephone %> <br/>  
+                                                lieu: <%= commande.livraison.Quartier.nom  %>, <%= commande.livraison.Quartier.Commune.nom  %> <br/>
+                                                <%= commande.livraison.Quartier.Commune.Ville.nom  %> 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_total_label"> <h6>Transporteur </h6></td>
+                                            <td class="cart_total_amount"><%= commande.Transporteur.nom %> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_total_label"><h6>Moyen de payement</h6></td>
+                                            <td class="cart_total_amount"><%= commande.Moyendepayement.nom %> </td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="border p-3 p-md-4">
+                            <div class="heading_s1 mb-3">
+                                <h6>Total commande</h6>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="cart_total_label">Total du panier</td>
+                                            <td class="cart_total_amount"><%= commande.montantht.toLocaleString("fr-FR") %> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_total_label">Transport</td>
+                                            <td class="cart_total_amount"><%= commande.montanttransport.toLocaleString("fr-FR") %> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_total_label">Taxe</td>
+                                            <td class="cart_total_amount"><%= commande.montanttaxe.toLocaleString("fr-FR") %> </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="cart_total_label">Total</td>
+                                            <td class="cart_total_amount"><strong><%= commande.montantttc.toLocaleString("fr-FR") %> <%= entreprise.devise %></strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END SECTION SHOP -->
+        
+        
+        </div>
+     <% } %>
+   
+</div>

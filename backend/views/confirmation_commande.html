@@ -1,0 +1,31 @@
+<%- include('sections/start.html') %>
+<!-- End Screen Load Popup Section --> 
+<!-- START HEADER -->
+<%- include('sections/header2_section.html') %>
+<!-- END HEADER -->
+
+<!-- START SECTION BREADCRUMB -->
+<%- include('sections/breadcrumb.html') %>
+<!-- END SECTION BREADCRUMB -->
+
+<!-- START MAIN CONTENT -->
+<div class="main_content">
+
+<% if (statut === "succes") { %>
+    <%- include('sections/commande_succes_section.html') %>
+ 
+    <% } else { %>
+        <%- include('sections/commande_echec_section.html') %>
+    <% } %>
+          
+ 
+
+
+</div>
+<!-- END MAIN CONTENT -->
+
+<!-- START FOOTER -->
+<%- include('sections/footer.html') %>
+
+<!-- END FOOTER -->
+<%- include('sections/end.html') %>

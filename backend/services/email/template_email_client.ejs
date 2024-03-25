@@ -1,0 +1,72 @@
+<%- include('./header.ejs') %>
+		<table cellpadding="0" cellspacing="0" border="0" align="center" width="640" style="width: 640px; min-width: 640px;" role="presentation" bgcolor="#FFFFFF">
+		<tbody>
+		<tr>
+		<!--
+		Titre du mail
+		-->
+			<td align="center" style="color:#45535C;padding:20px 40px 0 40px;font-family: 'Lato', Arial, Helvetica, sans-serif;font-weight:800;font-size:34px;-webkit-font-smoothing:antialiased;line-height:1.2;" class="table-container mobile-title">
+				<%= contenu.titre %>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" style="color:#45535C;padding:20px 40px 0 40px;font-family: 'Lato', Arial, Helvetica, sans-serif;font-weight:800;font-size:18px;-webkit-font-smoothing:antialiased;line-height:1.2;" class="table-container mobile-title">
+				 Féllicitations!!! <%= leclient.nom %> <%= leclient.prenom  %>,
+			</td>
+		</tr>
+		<tr>
+
+          <!--
+		Texte du mail
+		-->
+
+			<td align="center" style="color:#5a5a5a;padding:20px 40px 0 40px;font-family: 'Lato', Arial, Helvetica, sans-serif;font-weight:normal;font-size:14px;-webkit-font-smoothing:antialiased;line-height:1.4;" class="table-container">
+<%- contenu.message %>
+
+			</td>
+		</tr>
+		
+		</tbody>
+		</table>
+		<table cellpadding="0" cellspacing="0" border="0" align="center" width="640" style="width: 640px; min-width: 640px;" role="presentation" bgcolor="#FFFFFF">
+		<tr>
+			<td height="60" style="line-height:60px;min-height:60px;">
+			</td>
+		</tr>
+		</table>
+		<table cellpadding="0" cellspacing="0" border="0" align="center" width="640" style="width: 640px; min-width: 640px;" role="presentation" bgcolor="#FFFFFF">
+		</table>
+		<table cellpadding="0" cellspacing="0" border="0" align="center" width="640" style="width: 640px; min-width: 640px;" role="presentation" bgcolor="#FFFFFF">
+		<tr>
+			<td height="60" style="line-height:60px;min-height:60px;">
+			</td>
+		</tr>
+		</table>
+		<table cellpadding="0" cellspacing="0" border="0" align="center" width="640" style="width: 640px; min-width: 640px;" bgcolor="#FFFFFF" role="presentation" class="table-container ">
+		<tbody>
+			<tr>
+				<td height="20" style="line-height:10px;min-height:10px;">
+				</td>
+			</tr>
+			<tr>
+				<td align="center" style="color:#5a5a5a;padding:20px 40px 0 40px;font-family: 'Lato', Arial, Helvetica, sans-serif;font-weight:normal;font-size:14px;-webkit-font-smoothing:antialiased;line-height:1.4;" class="table-container">
+                 Vous pouvez suivre vos commandes ou consulter l'historique de vos achats en vous connectant à l'espace client de votre boutique, ou en cliquant sur le bouton ci-bas.
+			    </td>
+			</tr>
+			<tr>
+			  <td class="v-container-padding-padding" style="overflow-wrap:break-word;word-break:break-word;padding:10px 10px 25px 30px;font-family:'Rubik',sans-serif;" align="left">
+				
+		  <!--[if mso]><style>.v-button {background: transparent !important;}</style><![endif]-->
+		   <div class="v-text-align" align="center">
+		  <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://www.unlayer.com" style="height:37px; v-text-anchor:middle; width:218px;" arcsize="11%"  stroke="f" fillcolor="#805997"><w:anchorlock/><center style="color:#ffffff;"><![endif]-->
+			<a href="<%= parametresEmail.urlBoutique %>/profil" target="_blank" class="v-button v-size-width v-font-size" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #ffffff; background-color: #805997; border-radius: 4px;-webkit-border-radius: 4px; -moz-border-radius: 4px; width:39%; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;font-size: 14px;">
+			  <span class="v-line-height" style="display:block;padding:10px 20px;line-height:120%;"><strong><span style="font-size: 14px; line-height: 16.8px;">Aller dans l'espace client</span></strong></span>
+			</a>
+			<!--[if mso]></center></v:roundrect><![endif]-->
+		    </div>
+		
+			  </td>
+			</tr>
+		  </tbody>
+		</table>
+		<%- include('./footer.ejs') %>

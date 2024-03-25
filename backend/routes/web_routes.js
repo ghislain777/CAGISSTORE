@@ -1,0 +1,24 @@
+const webRoutes = require('express').Router();
+const webController = require("../controllers/web_controller");
+const validators = require('../validators/client.validator');
+webRoutes.get('/', async (req, res) => webController.produits(req, res))
+webRoutes.get('/login', async (req, res) => webController.login(req, res))
+webRoutes.get('/inscription', async (req, res) => webController.inscription(req, res))
+webRoutes.post('/inscription', validators.client, async (req, res) => webController.inscription(req, res))
+webRoutes.get('/produits', async (req, res) => webController.produits(req, res))
+webRoutes.get('/detail/:id', async (req, res) => webController.details(req, res))   //detail de produit
+webRoutes.post('/connexion', async (req, res) => webController.connexion(req, res))
+webRoutes.get('/profil', async (req, res) => webController.profil(req, res))
+webRoutes.post('/profil', validators.client, async (req, res) => webController.updateClient(req, res))
+webRoutes.post('/ajoutdanspanier/:id', async (req, res) => webController.ajoutdanspanier(req, res))
+webRoutes.post('/enleverdupanier/:id', async (req, res) => webController.enleverdupanier(req, res))
+webRoutes.get('/panier', async (req, res) => webController.panier(req, res))
+webRoutes.get('/commande', async (req, res) => webController.commande(req, res))
+webRoutes.get('/detailcommande/:id', async (req, res) => webController.detailCommande(req, res)) // detail de commande
+webRoutes.get('/confirmation_commande', async (req, res) => webController.confirmationCommande(req, res))
+webRoutes.get('/deconnexion', async (req, res) => webController.deconnexion(req, res))
+webRoutes.get('/:id/:nom', async (req, res) => webController.souscategorie(req, res))
+webRoutes.put('/adresse/suppression/:id', async (req, res) => webController.supprimerAdresse(req, res))
+
+webRoutes.all('*', async (req, res) => webController.error404(req, res))
+module.exports = webRoutes

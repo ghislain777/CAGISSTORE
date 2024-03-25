@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "ghislain",
+    "database": "cagistore",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "cagi_store",
+    "password": "GzeNu74sPgP!w*tx",
+    "database": "cagi_store",
+    "host": "cagistore.zentechnologies.net",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "kitacici_boutique",
+    "password": "GzeNu74sPgP!w*tx",
+    "database": "kitacici_boutique",
+    "host": "www.kitaci.ci",
+    "dialect": "mysql"
+  }
+}

@@ -1,0 +1,53 @@
+	
+                  	<div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
+                    	<div class="card">
+                        	<div class="card-header">
+                                <h3>Historique des commandes</h3>
+                            </div>
+                            <div class="card-body">
+                    			<div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Commande</th>
+                                                <th>Date</th>
+                                                <th>Statut</th>
+                                                <th>Total</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <% commandes.forEach(commande => { %>
+                                                <tr>
+                                                    
+                                                    <td> #<%= commande.id %></td>
+                                                    <td> <%= commande.datecommande.toLocaleDateString("fr-FR") %> </td>
+                                                    <td> <span pour="commande" statut="<%= commande.Statutcommande.id %>" class="p-1 mb-1 " > <%= commande.Statutcommande?.nom?? "" %></span> </td>
+                                                    <td> <%= commande.montantttc.toLocaleString("fr-FR")  %> <%= entreprise.devise %> </td>
+                                                    <td><!-- Example single danger button -->
+                                                        <div class="btn-group">
+                                                          <button type="button" class="btn btn-secondary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+                                                            Action
+                                                          </button>
+                                                          <ul class="dropdown-menu">
+                                                            <li><a action="detailler_commande" id="<%= commande.id %>" class="dropdown-item" href="/detailcommande/<%= commande.id %>">Détails</a></li>
+                                                            <li><hr class="dropdown-divider"></li>
+                                                            <li><a action="imprimer_commande" id="<%= commande.id %>" class="dropdown-item" href="#">Imprimer</a></li>
+                                                           
+                                                            <% if (commande.statutcommande != 5) { %>
+                                                            <li><hr class="dropdown-divider"></li>
+                                                            <li><a action="annuler_commande"  id="<%= commande.id %>" class="dropdown-item" href="#">Annuler</a></li>
+                                                            <% } %>
+                                                          </ul>
+                                                        </div>
+                                                        </td>
+                                                </tr>
+                                            <% }) %>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                  	</div>
