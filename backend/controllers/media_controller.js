@@ -18,6 +18,8 @@ const {
 var Jimp = require("jimp");
 const axios = require('axios');
 const fs = require('fs');
+const sharp = require('sharp');
+const https = require('https');
 const mediaController = {}
 
 mediaController.includeMedia = [
@@ -77,75 +79,52 @@ mediaController.telechargerMedia = async (req, res) => {
     const mime = require('mime-types');
     const webp=require('webp-converter');
    // console.log(req.body)
+   var extension
     const nouveauNom = fonctions.uniqid()
-    const extension = url.slice(
+    try {
+           extension = url.slice(
         ((url.lastIndexOf('.') - 1) >>> 0) + 2
     );
-    var destination = `public/fichiers/${modele}/${nouveauNom}.${extension}`
+    } catch (error) {
+        res(500).send("Erreur de chargement du media... url incorrecte")
+    }
+    
+  
+    var source = `public/fichiers/${modele}/${nouveauNom}.${extension}`
+    var destination = `public/fichiers/${modele}/${nouveauNom}_540x600.${extension}`
 
     // recuperation de l'image sur le net
-    const response = await axios.get(url, { responseType: 'arraybuffer' });
-  fs.writeFile(destination, response.data, (err) => {
+    const agent = new https.Agent({
+        rejectUnauthorized: false
+    });
+    const response = await axios.get(url, { responseType: 'arraybuffer',httpsAgent: agent });
+  fs.writeFile(source, response.data, (err) => {
     if (err) throw err;
     console.error('Image downloaded successfully!');
-    const mime_type = mime.lookup(destination)
+    const mime_type = mime.lookup(source)
 console.error(mime_type);
-if(mime_type === "image/webp") {
+//if(mime_type === "image/webp") {
+
+    // si l'image est webp on ne fai aucun traitement (s'assurer que le telechargement est fait en 540x600)
     // on convertir le fichier en jpg avant de le traiter
-    const result = webp.dwebp(destination,destination+'.png',"-o",logging="-v");
-    result.then((response) => {
-        console.log(response);
-        Jimp.read(destination+'.png').then((fichier => {
-            fichier
-                .contain(540, 600) // resize
-                .quality(100) // set JPEG quality
-                // .greyscale() // set greyscale
-                .write(destination)
-    
-            const media = {
-                nom: nom,
-                modele: modele,
-                fichier: `/fichiers/${modele}/${nouveauNom}.${extension}`,
-                champ: champ,
-                type: "image",
-            }
-            media[cle] = valeur
-    
-            Media.create(media).then(() => {
-                const lewhere = {
-                    modele: req.body.modele,
-                    champ: req.body.champ,
-                }
-                lewhere[cle] = +valeur
-                Media.findAll({
-                    where: lewhere
-                }).then((medias) => {
-                    res.send(medias)
-    
-    
-                })
-                
-            })
-    
-        }))
+    // const result = webp.dwebp(destination,destination+'.png',"-o",logging="-v");
+    // result.then((response) => {
+    //     console.log(response);
+    //     Jimp.read(destination+'.png').then((fichier => {
+    //         fichier
+    //             .contain(540, 600) // resize
+    //             .quality(100) // set JPEG quality
+    //             // .greyscale() // set greyscale
+    //             .write(destination)
 
-
-      });
-
-}
-else { // le fichier n'est pas de type webp
-
-    Jimp.read(destination).then((fichier => {
-        fichier
-            .contain(540, 600) // resize
-            .quality(100) // set JPEG quality
-            // .greyscale() // set greyscale
-            .write(destination)
+    sharp(source).resize({ height: 540, width: 600, fit: 'contain' }).toFile(destination)
+    .then(function(newFileInfo) {
+        console.log("redimentionnement webp success");
 
         const media = {
             nom: nom,
             modele: modele,
-            fichier: `/fichiers/${modele}/${nouveauNom}.${extension}`,
+            fichier: `/fichiers/${modele}/${nouveauNom}_540x600.${extension}`, //`/fichiers/${modele}/${nouveauNom}.${extension}`,
             champ: champ,
             type: "image",
         }
@@ -165,11 +144,59 @@ else { // le fichier n'est pas de type webp
 
             })
             
-        })
+         })
 
-    }))
+    })
+    .catch(function(err) {
+        console.log(err);
+    });
 
-}
+
+
+    
+    //     }))
+
+
+    //   });
+
+//}
+// else { 
+
+//     Jimp.read(destination).then((fichier => {
+//         fichier
+//             .contain(540, 600) // resize
+//             .quality(100) // set JPEG quality
+//             // .greyscale() // set greyscale
+//             .write(destination)
+
+//         const media = {
+//             nom: nom,
+//             modele: modele,
+//             fichier: `/fichiers/${modele}/${nouveauNom}.${extension}`,
+//             champ: champ,
+//             type: "image",
+//         }
+//         media[cle] = valeur
+
+//         Media.create(media).then(() => {
+//             const lewhere = {
+//                 modele: req.body.modele,
+//                 champ: req.body.champ,
+//             }
+//             lewhere[cle] = +valeur
+//             Media.findAll({
+//                 where: lewhere
+//             }).then((medias) => {
+//                 res.send(medias)
+
+
+//             })
+            
+//         })
+
+//     }))
+
+//}
   });
 
 }
