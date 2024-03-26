@@ -87,9 +87,9 @@ mediaController.telechargerMedia = async (req, res) => {
     const response = await axios.get(url, { responseType: 'arraybuffer' });
   fs.writeFile(destination, response.data, (err) => {
     if (err) throw err;
-    console.log('Image downloaded successfully!');
+    console.error('Image downloaded successfully!');
     const mime_type = mime.lookup(destination)
-console.log(mime_type);
+console.error(mime_type);
 if(mime_type === "image/webp") {
     // on convertir le fichier en jpg avant de le traiter
     const result = webp.dwebp(destination,destination+'.jpg',"-o",logging="-v");
