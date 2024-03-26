@@ -92,10 +92,10 @@ mediaController.telechargerMedia = async (req, res) => {
 console.error(mime_type);
 if(mime_type === "image/webp") {
     // on convertir le fichier en jpg avant de le traiter
-    const result = webp.dwebp(destination,destination+'.jpg',"-o",logging="-v");
+    const result = webp.dwebp(destination,destination+'.png',"-o",logging="-v");
     result.then((response) => {
         console.log(response);
-        Jimp.read(destination+'.jpg').then((fichier => {
+        Jimp.read(destination+'.png').then((fichier => {
             fichier
                 .contain(540, 600) // resize
                 .quality(100) // set JPEG quality
