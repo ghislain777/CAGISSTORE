@@ -6,6 +6,7 @@ const { imagesEmail, contenuEmailCommande, contenuEmailClient, contenuEmailUpdat
 const getEmailParametres = async () => {
   const parametresDb = await Parametre.findAll()
 return {
+  couleurEntete:'#C4CBE8',
   senderName: parametresDb.find((param, index, array) => param.nom =="EMAIL_NOM_ENVOYEUR").valeur,
   senderEmail: parametresDb.find((param, index, array) => param.nom =="EMAIL_EMAIL_ENVOYEUR").valeur,
   server: parametresDb.find((param, index, array) => param.nom =="EMAIL_EMAIL_SERVEUR").valeur,
@@ -140,7 +141,7 @@ const sendEmailUpdateProfile= async (leclient) => {
   const sender = `${parametresEmail.senderName} < ${parametresEmail.senderEmail} >`
 
 
-  const contenu = contenuEmailUpdateProfile(leclient)
+  const contenu = contenuEmailUpdateProfile(leclient, parametresEmail )
   ejs.renderFile(__dirname + '/template_email_update_profile.ejs', {leclient, contenu, imagesEmail, parametresEmail}, (err, data) => {
     if (err) {
       console.log(err);

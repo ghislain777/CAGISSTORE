@@ -98,7 +98,7 @@ else { // le formulaire est valide
 
    await  Client.update({nom, prenom, quartier, email, motdepasse}, {
         where:{
-            id: req.session.utilisateur.id
+            id: req.session?.utilisateur?.id?? 0
         }
     })
 
