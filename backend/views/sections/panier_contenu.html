@@ -44,7 +44,7 @@
                                 </td>
 
                                 <td>
-                                  <h4>  <%= panier.montantht.toLocaleString("fr-FR") %> <%= entreprise.devise %> </h4> 
+                                  <h4>  <%= (panier?.montantht?? 0).toLocaleString("fr-FR") %> <%= entreprise.devise %> </h4> 
                                 </td>
                            
 
